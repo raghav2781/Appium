@@ -15,9 +15,12 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 
-@CucumberOptions(features = "src/test/java/FeatureFiles", glue = { "stepDefination" }, tags = { "@tag2" }, plugin = {
-
-		"com.cucumber.listener.ExtentCucumberFormatter:Results/ExtentReports/Report.html" })
+@CucumberOptions(
+		features = "src/test/java/FeatureFiles",
+		glue = { "stepDefination" },
+		//tags = { "@tag2" },
+		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:Results/ExtentReports/Report.html" }
+						)
 public class TestRunner {
 
 	@AfterClass
