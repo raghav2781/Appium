@@ -127,6 +127,7 @@ public class Definations {
 			log.logInfo("'Assertion passed, title matched '");
 		} catch (AssertionError e) {
 			log.logError("Assertion Failed'title not matched'" + e);
+			throw e;
 		}
 		page1.portraitMode();
 		HomePage.closeDriver();
@@ -136,49 +137,91 @@ public class Definations {
 	@Then("^validate top heading of page$")
 	public void validate_top_heading_of_page() throws Throwable {
 		SearchedArticlePage page1 = new SearchedArticlePage();
-		Assert.assertTrue(
-				page1.titleText().toLowerCase().contains(ReadFromExcel.getDataFromExcel("article").toLowerCase()));
+		try {
+			Assert.assertTrue(
+					page1.titleText().toLowerCase().contains(ReadFromExcel.getDataFromExcel("article").toLowerCase()));
+			log.logInfo("'Assertion passed, validate top heading of page'");
+		} catch (AssertionError e) {
+			log.logError("Assertion Failed'title not matched'" + e);
+			throw e;
+		}
 		HomePage.closeDriver();
 	}
 
 	@Given("^click on AddToReadingList$")
 	public void click_on_AddToReadingList() {
 		SearchedArticlePage page1 = new SearchedArticlePage();
-		page1.clickOnSaveToReadingList();
+		try {
+			page1.clickOnSaveToReadingList();
+			log.logInfo("'Successfully clicked on AddToReadingList'");
+		} catch (Exception e) {
+			log.logError("Exception in'click on AddToReadingList'" + e);
+			throw e;
+		}
 	}
 
 	@Given("^click on createList$")
 	public void click_on_createList() throws Throwable {
 		SearchedArticlePage page1 = new SearchedArticlePage();
-		page1.createReadingList();
+		try {
+			page1.createReadingList();
+			log.logInfo("'Successfully clicked on createList'");
+		} catch (Exception e) {
+			log.logError("Exception in'click on createList'" + e);
+			throw e;
+		}
 	}
 
 	@Given("^press OK$")
 	public void press_OK() throws InterruptedException {
 		SearchedArticlePage page1 = new SearchedArticlePage();
-		page1.clickOnOkButton();
+		try {
+			page1.clickOnOkButton();
+			log.logInfo("'Successfully clicked on 'OK''");
+		} catch (Exception e) {
+			log.logError("Exception in'click on OK'" + e);
+			throw e;
+		}
 		Thread.sleep(4000);
 	}
 
 	@Given("^verify the added page$")
 	public void verify_the_added_page() throws Throwable {
 		SearchedArticlePage page1 = new SearchedArticlePage();
-		page1.clickOnSaveToReadingList();
+		try {
+			page1.clickOnSaveToReadingList();
 
-		Assert.assertEquals(page1.textOfRemoveMyList(), "Remove from My reading list");
+			Assert.assertEquals(page1.textOfRemoveMyList(), "Remove from My reading list");
+			log.logInfo("'Assertion passed, verify the added page'");
+		} catch (AssertionError e) {
+			log.logError("Assertion Failed'page not added'" + e);
+			throw e;
+		}
 		HomePage.closeDriver();
 	}
 
 	@Given("^click on myReadingList$")
 	public void click_on_myReadingList() throws Throwable {
 		SearchedArticlePage page1 = new SearchedArticlePage();
-		page1.clickOnSaveToReadingList();
+		try {
+			page1.clickOnSaveToReadingList();
+			log.logInfo("'Successfully clicked on myToReadingList'");
+		} catch (Exception e) {
+			log.logError("Exception in'click on myReadingList'" + e);
+			throw e;
+		}
 	}
 
 	@Given("^click on removeArticle from list$")
 	public void click_on_removeArticle_from_list() throws Throwable {
 		SearchedArticlePage page1 = new SearchedArticlePage();
-		page1.removeFromReadingList();
+		try {
+			page1.removeFromReadingList();
+			log.logInfo("'Successfully clicked removeArticle from list'");
+		} catch (Exception e) {
+			log.logError("Exception in'click on removeArticle from list'" + e);
+			throw e;
+		}
 		Thread.sleep(5000);
 	}
 
@@ -186,7 +229,13 @@ public class Definations {
 	public void verify_the_removing_of_article_from_myReadingList() {
 		SearchedArticlePage page1 = new SearchedArticlePage();
 		page1.clickOnSaveToReadingList();
-		Assert.assertEquals(page1.textOfCreateNewList(), "Create new");
+		try {
+			Assert.assertEquals(page1.textOfCreateNewList(), "Create new");
+			log.logInfo("'Assertion passed, verify the removing of article from myReadingList'");
+		} catch (AssertionError e) {
+			log.logError("Assertion Failed'verify the removing of article from myReadingList'" + e);
+			throw e;
+		}
 		HomePage.closeDriver();
 
 	}
